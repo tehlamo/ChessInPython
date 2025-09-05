@@ -26,7 +26,7 @@ class ChessGame:
         for row in range(len(self._board)):
             symbols = []
             for col in range(len(self._board[row])):
-                if self._board[col][row] is None:
+                if self._board[row][col] is None:
                     symbols.append("□")
                 else:
                     symbols.append(self._board[row][col].get_symbol())
