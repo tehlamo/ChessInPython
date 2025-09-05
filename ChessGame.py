@@ -22,4 +22,13 @@ class ChessGame:
     def get_current_turn(self):
         return self._current_turn
     
-    
+    def get_game(self):
+        for row in range(len(self._board)):
+            symbols = []
+            for col in range(len(self._board[row])):
+                if self._board[col][row] is None:
+                    symbols.append("□")
+                else:
+                    symbols.append(self._board[row][col].get_symbol())
+            symbol_row = " ".join(symbols)
+            print(symbol_row)
