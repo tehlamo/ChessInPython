@@ -32,3 +32,6 @@ class ChessGame:
                     symbols.append(self._board[row][col].get_symbol())
             symbol_row = " ".join(symbols)
             print(symbol_row)
+
+    def make_move(self, from_sq, to_sq):
+        print("Working")
