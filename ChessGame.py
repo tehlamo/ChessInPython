@@ -34,4 +34,24 @@ class ChessGame:
             print(symbol_row)
 
     def make_move(self, from_sq, to_sq):
-        print("Working")
+        from_coord = self._get_indicies(from_sq)
+        to_coord = self._get_indicies(to_sq)
+        if from_coord is None:
+            return False
+        elif to_coord is None:
+            return False
+        else:
+            from_col, from_row = from_coord
+            to_col, to_row = to_coord
+            if self._board[from_col][from_row].get_color() != self._current_turn:
+                print("Invalid move, it is currently", self._current_turn, "player's turn.")
+            elif self._board[from_col][from_row] is None:
+                print("Invalid move, piece to move doesn't exist.")
+
+
+    def _get_indicies(self, coordinate):
+        letter = coordinate[0]
+        col = ord(letter) - ord('a')
+        number = int(coordinate[1])
+        row = number - 1
+        return col, row
