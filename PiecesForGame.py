@@ -52,8 +52,21 @@ class Pawn(Piece):
                         temp_row = temp_row + step_row
                         if (board[temp_row][to_col] is not None):
                             return False
-                elif (from_row != 7) and (self._first_move is False):
-
+                        else:
+                            return True
+                elif (from_row != 7) and (self._ep_on is False) and (abs(delta_row) == 1):
+                    if (board[to_row][to_col] is not None):
+                        return False
+                    else:
+                        return True
+            elif (delta_row == 1) and (abs(delta_col) == 1):
+                if board[to_row][to_col] is None:
+                    return False
+                else:
+                    if board[to_row][to_col].get_color() == self._color:
+                        return False
+                    else:
+                        return True
         elif self._color == 'BLACK':
             return False
 
