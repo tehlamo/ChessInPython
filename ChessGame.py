@@ -45,18 +45,17 @@ class ChessGame:
                 if (self._board[4][square].get_name() == 'Pawn') and (self._board[4][square].get_color() == self._current_turn):
                     self._board[4][sqaure].set_ep_on = False
 
-        if from_coord is None:
-            return False
-        elif to_coord is None:
+        if (from_coord is None) or (to_coord is None):
             return False
         else:
             from_row, from_col = from_coord
             to_col, to_row = to_coord
             if self._board[from_row][from_col].get_color() != self._current_turn:
                 print("Invalid move, it is currently", self._current_turn, "player's turn.")
+                return False
             elif self._board[from_row][from_col] is None:
                 print("Invalid move, piece to move doesn't exist.")
-
+                return False
 
     def _get_indicies(self, coordinate):
         number = int(coordinate[1])
