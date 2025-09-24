@@ -36,6 +36,15 @@ class ChessGame:
     def make_move(self, from_sq, to_sq):
         from_coord = self._get_indicies(from_sq)
         to_coord = self._get_indicies(to_sq)
+        if  self._current_turn == 'WHITE':
+            for square in range(len(self._board[6])):
+                if (self._board[6][square].get_name() == 'Pawn') and (self._board[6][square].get_color() == self._current_turn):
+                    self._board[6][square].set_ep_on = False
+        elif self._current_turn == 'BLACK':
+            for sqaure in range(len(self.board[4][square])):
+                if (self._board[4][square].get_name() == 'Pawn') and (self._board[4][square].get_color() == self._current_turn):
+                    self._board[4][sqaure].set_ep_on = False
+
         if from_coord is None:
             return False
         elif to_coord is None:

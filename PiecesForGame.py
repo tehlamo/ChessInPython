@@ -17,10 +17,45 @@ class Pawn(Piece):
     def __init__(self, color):
         super().__init__(color)
         self._name = 'Pawn'
+        self._ep_on = False
         if self._color == 'BLACK':
             self._symbol = '♙'
         elif self._color == 'WHITE':
             self._symbol = '♟'
+
+    def set_ep_on(self, state):
+        self._ep_on = state
+    
+    def is_valid_move(self, from_row, from_col, to_row, to_col, board):
+        delta_row = to_row - from_row
+        delta_col = to_col - from_col
+        temp_row = from_row
+        temp_col = from_col
+        if delta_row > 0:
+            step_row = 1
+        elif delta_row < 0:
+            step_row = -1
+        else:
+            step_row = 0
+        if delta_col > 0:
+            step_col = 1
+        elif delta_col < 0:
+            step_col = -1
+        else:
+            step_col = 0
+
+        if self._color == 'WHITE':
+            if (delta_row < 0) and (delta_col == 0):
+                if (from_row == 7) and (abs(delta_row) == 2) and (self._ep_on is False):
+                    self._ep_on == True
+                    for square in range (abs(delta_row) - 1):
+                        temp_row = temp_row + step_row
+                        if (board[temp_row][to_col] is not None):
+                            return False
+                elif (from_row != 7) and (self._first_move is False):
+
+        elif self._color == 'BLACK':
+            return False
 
 class Rook(Piece):
     def __init__(self, color):
@@ -76,58 +111,14 @@ class Knight(Piece):
     def is_valid_move(self, from_row, from_col, to_row, to_col, board):
         delta_row = to_row - from_row
         delta_col = to_col - from_col
-        temp_row = from_row
-        temp_col = from_col
-        if delta_row > 0:
-            step_row = 1
-        elif delta_row < 0:
-            step_row = -1
-        else:
-            step_row = 0
-        if delta_col > 0:
-            step_col = 1
-        elif delta_col < 0:
-            step_col = -1
-        else:
-            step_col = 0
 
-        if (self._color == 'BLACK') and (from_row == 2) and (1 == abs(delta_row) or abs(delta_row) == 2) and (delta_row < 0):
-            for square in range(abs(delta_row + delta_col) - 1):
-                temp_row = temp_row + step_row
-                temp_col = temp_col + step_col
-                if (board[temp_row][temp_col] is not None) and (temp_row != to_row and temp_col != to_col):
-                    return False
-                elif (board[temp_row][temp_col] is not None) and (temp_row == to_row and temp_col == to_col):
-                    if board[temp_row][temp_col].get_color() == self._color:
-                        return False
-                    else:
-                        return True
-            return True
-        elif (self._color == 'WHITE') and (from_row == 7) and (abs(delta_row) == 1 or abs(delta_row) == 2) and (delta_row > 0):
-            for square in range(abs(delta_row + delta_col) - 1):
-                temp_row = temp_row + step_row
-                temp_col = temp_col + step_col
-                if (board[temp_row][temp_col] is not None) and (temp_row != to_row and temp_col != to_col):
-                    return False
-                elif (board[temp_row][temp_col] is not None) and (temp_row == to_row and temp_col == to_col):
-                    if board[temp_row][temp_col].get_color() == self._color:
-                        return False
-                    else:
-                        return True
-            return True
-        elif (self._color == 'BLACK') and (from_row != 2 and from_row != 5) and (abs(delta_row) == 1) and (delta_row < 0):
-            if (board[to_row][to_col] is not None) and (board[temp_row][temp_col].get_color() == self._color):
+        if (abs(delta_row) == 2 or abs(delta_col) == 2) and (abs(delta_row) == 1 or abs(delta_col) == 1):
+            if board[to_row][to_col].get_color() == self._color:
                 return False
             else:
                 return True
-        elif  (self._color == 'WHITE') and (from_row != 7 and from_row != 4) and (abs(delta_row) == 1) and (delta_row > 0):
-            if (board[to_row][to_col] is not None) and (board[temp_row][temp_col].get_color() == self._color):
-                return False
-            else:
-                return True
-        elif (self._color == 'BLACK') and (from_row == 5):
-            if (board[from_row][from_col + 1].get_name() == 'Pawn') and (delta_row > 0) and (abs(delta_row) == abs(delta_col)):
-                
+        else:
+            return False
 
 class Bishop(Piece):
     def __init__(self, color):
