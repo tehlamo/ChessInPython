@@ -23,6 +23,9 @@ class Pawn(Piece):
         elif self._color == 'WHITE':
             self._symbol = '♟'
 
+    def get_ep_on(self):
+        return self._ep_on
+
     def set_ep_on(self, state):
         self._ep_on = state
     
@@ -44,7 +47,7 @@ class Pawn(Piece):
         else:
             step_col = 0
 
-        if self._color == 'WHITE':
+        if board[from_row][from_col] == 'WHITE':
             if (delta_row < 0) and (delta_col == 0):
                 if (from_row == 7) and (abs(delta_row) == 2) and (self._ep_on is False):
                     self._ep_on == True
@@ -62,8 +65,13 @@ class Pawn(Piece):
             elif (delta_row == 1) and (abs(delta_col) == 1):
                 if board[to_row][to_col] is None:
                     return False
+                elif (board[from_row][to_col].get_name() == 'Pawn') and (board[from_row][to_col].get_color() != board[from_row][from_col].get_color()):
+                    if board[from_row][to_col].get_ep_on() is True:
+                        return True
+                    else:
+                        return False
                 else:
-                    if board[to_row][to_col].get_color() == self._color:
+                    if board[to_row][to_col].get_color() == board[from_row][from_col].get_color():
                         return False
                     else:
                         return True
