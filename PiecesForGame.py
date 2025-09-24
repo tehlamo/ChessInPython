@@ -111,11 +111,8 @@ class Rook(Piece):
                 temp_col = temp_col + step_col
                 if (board[temp_row][temp_col] is not None) and (temp_row != to_row and temp_col != to_col):
                     return False
-                elif (board[temp_row][temp_col] is not None) and (temp_row == to_row and temp_col == to_col):
-                    if board[temp_row][temp_col].get_color() == self._color:
-                        return False
-                    else:
-                        return True
+                else:
+                    return True
             return True
         else:
             return False
@@ -134,10 +131,7 @@ class Knight(Piece):
         delta_col = to_col - from_col
 
         if (abs(delta_row) == 2 or abs(delta_col) == 2) and (abs(delta_row) == 1 or abs(delta_col) == 1):
-            if board[to_row][to_col].get_color() == self._color:
-                return False
-            else:
-                return True
+            return True
         else:
             return False
 
@@ -174,11 +168,8 @@ class Bishop(Piece):
                 temp_col = temp_col + step_col
                 if (board[temp_row][temp_col] is not None) and (temp_row != to_row and temp_col != to_col):
                     return False
-                elif (board[temp_row][temp_col] is not None) and (temp_row == to_row and temp_col == to_col):
-                    if board[temp_row][temp_col].get_color() == self._color:
-                        return False
-                    else:
-                        return True
+                else:
+                    return True
             return True
         else:
             return False
@@ -216,11 +207,8 @@ class Queen(Piece):
                 temp_col = temp_col + step_col
                 if (board[temp_row][temp_col] is not None) and (temp_row != to_row and temp_col != to_col):
                     return False
-                elif (board[temp_row][temp_col] is not None) and (temp_row == to_row and temp_col == to_col):
-                    if board[temp_row][temp_col].get_color() == self._color:
-                        return False
-                    else:
-                        return True
+                else:
+                    return True
             return True
         elif (abs(delta_row) == abs(delta_col)) and (1 <= abs(delta_row)):
             for square in range(abs(delta_col) - 1):
@@ -228,11 +216,8 @@ class Queen(Piece):
                 temp_col = temp_col + step_col
                 if (board[temp_row][temp_col] is not None) and (temp_row != to_row and temp_col != to_col):
                     return False
-                elif (board[temp_row][temp_col] is not None) and (temp_row == to_row and temp_col == to_col):
-                    if board[temp_row][temp_col].get_color() == self._color:
-                        return False
-                    else:
-                        return True
+                else:
+                    return True
             return True
         else:
             return False
@@ -270,11 +255,8 @@ class King(Piece):
                 temp_col = temp_col + step_col
                 if (board[temp_row][temp_col] is not None) and (temp_row != to_row and temp_col != to_col):
                     return False
-                elif (board[temp_row][temp_col] is not None) and (temp_row == to_row and temp_col == to_col):
-                    if board[temp_row][temp_col].get_color() == self._color:
-                        return False
-                    else:
-                        return True
+                else:
+                    return True
             return True
         elif (abs(delta_row) == abs(delta_col)) and (1 == abs(delta_row)):
             for square in range(abs(delta_col) - 1):
@@ -282,11 +264,8 @@ class King(Piece):
                 temp_col = temp_col + step_col
                 if (board[temp_row][temp_col] is not None) and (temp_row != to_row and temp_col != to_col):
                     return False
-                elif (board[temp_row][temp_col] is not None) and (temp_row == to_row and temp_col == to_col):
-                    if board[temp_row][temp_col].get_color() == self._color:
-                        return False
-                    else:
-                        return True
+                else:
+                    return True
             return True
         else:
             return False

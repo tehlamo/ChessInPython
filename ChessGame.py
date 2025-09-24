@@ -56,6 +56,9 @@ class ChessGame:
             elif self._board[from_row][from_col] is None:
                 print("Invalid move, piece to move doesn't exist.")
                 return False
+            elif (self._board[to_row][to_col] != None) and (self._board[to_row][to_col].get_color() == self._current_turn):
+                print("invalid move, piece can't capture or move to another square with the same color.")
+                return False
 
     def _get_indicies(self, coordinate):
         number = int(coordinate[1])
